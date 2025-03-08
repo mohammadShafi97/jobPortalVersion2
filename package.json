@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js"
+    "setup-production-app": "npm i && cd client && npm i && npm run build"
   },
   "author": "",
   "license": "ISC",

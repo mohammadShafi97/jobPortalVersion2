@@ -7,6 +7,8 @@ import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 import authRouter from "./modules/auth/routers/authRouter.js";
 import employerDashboardRouter from "./modules/employer/routers/employerDashboardRouter.js";
@@ -26,7 +28,8 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.resolve(__dirname, "./client/dist")));
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -54,6 +57,10 @@ app.use(
   employerDashboardRouter
 );
 app.use("/api/jobportal/messages", authenticateUser, JPMessageRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
+});
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "Not Found" });

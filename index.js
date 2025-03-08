@@ -42,21 +42,16 @@ app.use(
   })
 );
 
-app.use("/api/auth", authRouter);
-app.use("/api/user", authenticateUser, userRouter);
+app.use("/auth", authRouter);
+app.use("/user", authenticateUser, userRouter);
+app.use("/jobseeker", authenticateUser, authenticateJobSeeker, jobseekerRouter);
 app.use(
-  "/api/jobseeker",
-  authenticateUser,
-  authenticateJobSeeker,
-  jobseekerRouter
-);
-app.use(
-  "/api/employer",
+  "/employer",
   authenticateUser,
   authenticateEmployer,
   employerDashboardRouter
 );
-app.use("/api/jobportal/messages", authenticateUser, JPMessageRouter);
+app.use("/jobportal/messages", authenticateUser, JPMessageRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));

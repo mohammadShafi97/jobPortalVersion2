@@ -1,0 +1,18 @@
+.topmargin {
+  margin-top: 100px;
+}
+
+.loginContainer {
+  width: 30%;
+}
+
+@media (max-width: 968px) {
+  .loginContainer {
+    width: 60%;
+  }
+}
+@media (max-width: 576px) {
+  .loginContainer {
+    width: 90%;
+  }
+}

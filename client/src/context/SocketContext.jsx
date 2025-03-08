@@ -20,7 +20,7 @@ export const SocketContextProvider = ({ children }) => {
     if (userInfo) {
       const newId = type === "employer" ? EInfo?._id : JSInfo?._id;
 
-      const socket = io("http://localhost:3000", {
+      const socket = io("https://jobportalversion2.onrender.com", {
         query: {
           userId: newId,
         },
